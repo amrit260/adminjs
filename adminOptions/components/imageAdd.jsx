@@ -1,27 +1,23 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { DropZone, Label, Box } from '@adminjs/design-system'
+import { ApiClient } from 'adminjs'
+
 
 const UploadPhoto = (props) => {
-    const { property, record, onChange } = props
+    useEffect(() => {
+        const api = new ApiClient()
+        console.log('useeff is running')
+        api.resourceAction({ resourceId: 'Car', actionName: 'list' }).then(results => {
+            console.log(results)
+        }, [])
 
-    const onUpload = (files) => {
-        // const newRecord = { ...record }
-        // const file = files.length && files[0]
 
-        // onChange({
-        //     ...newRecord,
-        //     params: {
-        //         ...newRecord.params,
-        //         [property.name]: file,
-        //     }
-        // })
-        onChange(property.name, files[0])
-    }
+    })
+
 
     return (
         <Box>
-            <Label>{property.label}</Label>
-            <DropZone onChange={onUpload} />
+            <h1>this is a mighty dashboard, and is customizable</h1>
         </Box>
     )
 }

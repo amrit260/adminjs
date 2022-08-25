@@ -1,61 +1,41 @@
 const UserModel = require('../models/userModel')
 const userOptions = require('./userOptions')
 const CarModel = require('../models/carModel')
-const carOptions = require('./carOptions')
-const uploadFeature = require('@adminjs/upload')
+const { carOptions, carFeatures } = require('./carOptions')
+// const uploadFeature = require('@admin-bro/upload')
+const TravelDestinations = require('../models/travelDestinations')
+const { TravelDestinationsOptions, TravelDestinationsFeatures } = require('./travelDestinations')
+const path = require('path')
 const { Schema } = require('mongoose')
+const { default: adminjs } = require('adminjs')
 
 
 module.exports = {
-    resources: [{
-        resource: UserModel, options: userOptions
-    }, {
-        resource: CarModel, options: carOptions,
-        features: [uploadFeature({
-            provider: { local: { bucket: 'public' } },
-            properties: {
-                key: 'picture.key', // to this db field feature will safe S3 key
-                // this property is important because allows to have previews
-                filePath: 'picture.filePath',
-                file: 'picture.file',
-                filename: 'picture.filename',
-                filesToDelete: 'picture.filesToDelete',
-                bucket: `picture.bucket`,
-                mimeType: 'picture.mimeType',
+    resources: [
+        {
+            resource: UserModel, options: userOptions
+        },
+        {
+            resource: CarModel, options: carOptions, features: carFeatures
 
-            },
-            validation: {
-                mimeTypes: ['image/png', 'image/jpeg']
-            },
-            uploadPath: (record, filename) => {
-                return `${filename}`
-            },
+        },
+        {
+            resource: TravelDestinations, options: TravelDestinationsOptions, features: TravelDestinationsFeatures
 
-        }),
-        uploadFeature({
-            provider: { local: { bucket: 'public' } },
-            properties: {
-                key: `images.path`, // to this db field feature will safe S3 key
-                // this property is important because allows to have previews
-                filePath: 'images.filePath',
-                file: `Images`,
-                filename: `images.filename`,
-                filesToDelete: 'images.filestoDelete',
-                // bucket: `images.bucket`,
-                mimeType: `images.mimeType`,
-            }, multiple: true,
-            validation: {
-                mimeTypes: ['image/png', 'image/jpeg']
-            },
-            uploadPath: (record, filename) => {
-                return `/images/${filename}`
-            },
-
-        })
-        ]
-    }],
+        }
+    ],
+    dashboard: {
+        handler: async (request, response, context) => {
+            console.log(request)
+            console.log('fuck')
+        }
+        ,
+        component: adminjs.bundle('./components/imageAdd.jsx')
+    },
     branding: {
-        companyName: 'Hawa cmp',
+        companyName: 'NAT',
+        withMadeWithLove: false,
+        logo: '/public/logo.png'
     },
 
 }

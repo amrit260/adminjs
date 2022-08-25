@@ -10,7 +10,7 @@ const app = express()
 AdminJS.registerAdapter(AdminJSMongoose)
 
 const run = async () => {
-    await mongoose.connect('mongodb://localhost:27017/bro')
+    await mongoose.connect('mongodb+srv://amrit:natpass@cluster0.hwyb1.mongodb.net/?retryWrites=true&w=majority')
     app.use('/public', express.static('public'));
     const adminJs = new AdminJS(AdminJSOptions)
     adminJs.watch()

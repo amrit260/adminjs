@@ -20,7 +20,7 @@ const AdminRouter = (adminJs) => {
     }, null, {
         resave: false,
         saveUninitialized: true,
-        store: MongoStore.create({ mongoUrl: 'mongodb://localhost:27017/bro' })
+        store: MongoStore.create({ mongoUrl: 'mongodb+srv://amrit:natpass@cluster0.hwyb1.mongodb.net/?retryWrites=true&w=majority' })
     })
     return router
 }
