@@ -16,7 +16,7 @@ const AdminRouter = (adminJs) => {
             }
             return false
         },
-        cookiePassword: 'some-secret-password-used-to-secure-cookie',
+        cookiePassword: 'some-ssecret-password-used-to-secure-cookie',
     }, null, {
         resave: false,
         saveUninitialized: true,
@@ -24,5 +24,6 @@ const AdminRouter = (adminJs) => {
     })
     return router
 }
+
 
 module.exports = AdminRouter
