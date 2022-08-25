@@ -17,7 +17,7 @@ const run = async () => {
     const router = BuildRouter(adminJs)
     app.use(adminJs.options.rootPath, router)
 
-    app.listen(3000, () => console.log('AdminJS is under localhost:8080/admin'))
+    app.listen(process.env.PORT || 3000, () => console.log('AdminJS is under localhost:8080/admin'))
 }
 
 run()
